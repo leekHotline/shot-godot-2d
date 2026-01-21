@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0n4mcanapkp8"]
+
+[ext_resource type="Texture2D" uid="uid://craul54u64lxp" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_iukft"]
+[ext_resource type="PackedScene" uid="uid://jpflq241m6l" path="res://Scenes/player.tscn" id="2_gl6un"]
+[ext_resource type="PackedScene" uid="uid://qfns05e1vto0" path="res://Scenes/Slime.tscn" id="3_j5yw3"]
+[ext_resource type="PackedScene" uid="uid://4ojqtaf8gkqw" path="res://Scenes/Bullet.tscn" id="4_kldst"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gl6un"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_j5yw3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kldst"]
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+
+[node name="BackGround-left" type="Sprite2D" parent="."]
+position = Vector2(-120, 0)
+texture = ExtResource("1_iukft")
+metadata/_edit_lock_ = true
+
+[node name="BackGround-right" type="Sprite2D" parent="."]
+position = Vector2(120, 0)
+texture = ExtResource("1_iukft")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.41, 2.41)
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_gl6un")]
+position = Vector2(-195, 78)
+move_speed = 100.0
+
+[node name="Boundary" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Boundary"]
+
+[node name="CollisionShape2D-Bottom" type="CollisionShape2D" parent="Boundary/StaticBody2D"]
+position = Vector2(0, 131.025)
+shape = SubResource("WorldBoundaryShape2D_gl6un")
+
+[node name="CollisionShape2D-Right" type="CollisionShape2D" parent="Boundary/StaticBody2D"]
+position = Vector2(235, 61)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_gl6un")
+
+[node name="CollisionShape2D-Left" type="CollisionShape2D" parent="Boundary/StaticBody2D"]
+position = Vector2(-236, 61)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_j5yw3")
+
+[node name="CollisionShape2D-Top" type="CollisionShape2D" parent="Boundary/StaticBody2D"]
+position = Vector2(0, 35)
+rotation = -3.1415925
+shape = SubResource("WorldBoundaryShape2D_kldst")
+
+[node name="Area2D" parent="." instance=ExtResource("3_j5yw3")]
+position = Vector2(147, 77)
+slime_speed = -50.0
+
+[node name="Bullet" parent="." instance=ExtResource("4_kldst")]
+bullet_speed = 300.0
