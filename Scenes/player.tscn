@@ -1,8 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://jpflq241m6l"]
+[gd_scene load_steps=25 format=3 uid="uid://jpflq241m6l"]
 
 [ext_resource type="Texture2D" uid="uid://bmwcsrmuo11b8" path="res://AssetBundle/Sprites/Foxy.png" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://4ojqtaf8gkqw" path="res://Scenes/Bullet.tscn" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://ds68owk20ehol" path="res://Scripts/player.gd" id="2_cvnsp"]
+[ext_resource type="AudioStream" uid="uid://cxludivfipc6h" path="res://AssetBundle/Audio/Gun.mp3" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://b187b4vmukvnp" path="res://AssetBundle/Audio/GameOver.mp3" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://bdto60487aosh" path="res://AssetBundle/Audio/Running.mp3" id="5_x3wgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
 atlas = ExtResource("1_v0iea")
@@ -154,4 +157,21 @@ shape = SubResource("CircleShape2D_cvnsp")
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="FireSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vgqql")
+
+[node name="RunSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_x3wgy")
+volume_db = 5.0
+autoplay = true
+parameters/looping = false
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fkybt")
+volume_db = 2.0
+
+[node name="RestartTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_fire"]
+[connection signal="timeout" from="RestartTimer" to="." method="_reload_scene"]

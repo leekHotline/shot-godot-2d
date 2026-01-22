@@ -14,10 +14,17 @@ config/name="MyFirstGame"
 run/main_scene="uid://c0n4mcanapkp8"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+config/windows_native_icon="res://AssetBundle/shot.ico"
 
 [autoload]
 
 Global="*res://global.gd"
+Bgm="*res://Scenes/BGM.tscn"
+
+[display]
+
+window/size/mode=4
+window/stretch/mode="canvas_items"
 
 [input]
 

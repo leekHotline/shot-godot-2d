@@ -17,7 +17,8 @@ func _physics_process(delta: float) -> void:
 
 # 添加信号 就是触发器 当slime碰撞玩家 执行函数中代码
 func _on_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	#如果碰撞到了 且史莱姆活着的时候才结束 防止0.6s的死亡动画也算
+	if body is CharacterBody2D and not is_dead:
 		print('hit player')
 		body.game_over()
 		Global.score_board = 0
@@ -32,6 +33,7 @@ func _on_area_entered(area: Area2D) -> void:
 		Global.score_board += 3
 		print('bullet hit slime,score is now:',Global.score_board)
 		$AnimatedSprite2D.play('death')
+		$SlimeDeathSound.play()
 		# 史莱姆和子弹也释放
 		area.queue_free()
 		
