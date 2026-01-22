@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://jpflq241m6l"]
+[gd_scene load_steps=22 format=3 uid="uid://jpflq241m6l"]
 
 [ext_resource type="Texture2D" uid="uid://bmwcsrmuo11b8" path="res://AssetBundle/Sprites/Foxy.png" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://4ojqtaf8gkqw" path="res://Scenes/Bullet.tscn" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://ds68owk20ehol" path="res://Scripts/player.gd" id="2_cvnsp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
@@ -138,12 +139,13 @@ animations = [{
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
 script = ExtResource("2_cvnsp")
 animator = NodePath("AnimatedSprite2D")
+bullet_scenes = ExtResource("2_6t5aa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fkybt")
 animation = &"game_over"
 autoplay = "idle"
-frame_progress = 0.7158267
+frame_progress = 0.06683775
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

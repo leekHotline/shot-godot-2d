@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0n4mcanapkp8"]
+[gd_scene load_steps=10 format=3 uid="uid://c0n4mcanapkp8"]
 
 [ext_resource type="Texture2D" uid="uid://craul54u64lxp" path="res://AssetBundle/Sprites/ForestBackground.png" id="1_iukft"]
+[ext_resource type="Script" uid="uid://ce5siexwpjvut" path="res://Scripts/GameManager.gd" id="1_kldst"]
 [ext_resource type="PackedScene" uid="uid://jpflq241m6l" path="res://Scenes/player.tscn" id="2_gl6un"]
 [ext_resource type="PackedScene" uid="uid://qfns05e1vto0" path="res://Scenes/Slime.tscn" id="3_j5yw3"]
-[ext_resource type="PackedScene" uid="uid://4ojqtaf8gkqw" path="res://Scenes/Bullet.tscn" id="4_kldst"]
+[ext_resource type="FontFile" uid="uid://idyy7mac6ji7" path="res://AssetBundle/Uranus_Pixel_11Px.ttf" id="5_7lihs"]
+[ext_resource type="Script" uid="uid://bseskww2odl68" path="res://Scripts/score_label.gd" id="5_b2bpf"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gl6un"]
 
@@ -11,8 +13,12 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kldst"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("wait_timer", "game_over_label")]
 y_sort_enabled = true
+script = ExtResource("1_kldst")
+slime_scene = ExtResource("3_j5yw3")
+wait_timer = NodePath("Timer")
+game_over_label = NodePath("CanvasLayer/Gamer Over Label")
 
 [node name="BackGround-left" type="Sprite2D" parent="."]
 position = Vector2(-120, 0)
@@ -33,6 +39,7 @@ position = Vector2(-195, 78)
 move_speed = 100.0
 
 [node name="Boundary" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Boundary"]
 
@@ -55,9 +62,60 @@ position = Vector2(0, 35)
 rotation = -3.1415925
 shape = SubResource("WorldBoundaryShape2D_kldst")
 
-[node name="Area2D" parent="." instance=ExtResource("3_j5yw3")]
-position = Vector2(147, 77)
-slime_speed = -50.0
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 
-[node name="Bullet" parent="." instance=ExtResource("4_kldst")]
-bullet_speed = 300.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Score Board" type="Label" parent="CanvasLayer"]
+top_level = true
+offset_left = 51.0
+offset_top = 41.0
+offset_right = 142.0
+offset_bottom = 75.0
+theme_override_fonts/font = ExtResource("5_7lihs")
+theme_override_font_sizes/font_size = 48
+script = ExtResource("5_b2bpf")
+
+[node name="Gamer Over Label" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -382.5
+offset_top = -80.0
+offset_right = 382.5
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.25666475, 0.80955166, 0.48677903, 1)
+theme_override_constants/outline_size = 60
+theme_override_fonts/font = ExtResource("5_7lihs")
+theme_override_font_sizes/font_size = 160
+text = "Game Over!"
+
+[node name="Author" type="Label" parent="CanvasLayer/Gamer Over Label"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -287.0
+offset_top = 163.0
+offset_right = 288.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.3396849, 0.64146775, 0.43520674, 0)
+theme_override_colors/font_outline_color = Color(0.25666475, 0.80955166, 0.48677903, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("5_7lihs")
+theme_override_font_sizes/font_size = 80
+text = "Game by lekkHotline"
+
+[connection signal="timeout" from="Timer" to="." method="_generate_slime"]
