@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://jpflq241m6l"]
+[gd_scene load_steps=30 format=3 uid="uid://jpflq241m6l"]
 
 [ext_resource type="Texture2D" uid="uid://bmwcsrmuo11b8" path="res://AssetBundle/Sprites/Foxy.png" id="1_v0iea"]
-[ext_resource type="PackedScene" uid="uid://4ojqtaf8gkqw" path="res://Scenes/Bullet.tscn" id="2_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://4ojqtaf8gkqw" path="res://Scenes/Bullet.tscn" id="2_3smsa"]
 [ext_resource type="Script" uid="uid://ds68owk20ehol" path="res://Scripts/player.gd" id="2_cvnsp"]
+[ext_resource type="PackedScene" uid="uid://dim6nsk2f1ens" path="res://Scenes/WaterBullet.tscn" id="3_8erm5"]
 [ext_resource type="AudioStream" uid="uid://cxludivfipc6h" path="res://AssetBundle/Audio/Gun.mp3" id="4_vgqql"]
 [ext_resource type="AudioStream" uid="uid://b187b4vmukvnp" path="res://AssetBundle/Audio/GameOver.mp3" id="5_fkybt"]
 [ext_resource type="AudioStream" uid="uid://bdto60487aosh" path="res://AssetBundle/Audio/Running.mp3" id="5_x3wgy"]
@@ -46,6 +47,22 @@ region = Rect2(66, 0, 33, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(99, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(0, 288, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(33, 288, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs7ks"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(66, 288, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6n3p"]
+atlas = ExtResource("1_v0iea")
+region = Rect2(99, 288, 33, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
 atlas = ExtResource("1_v0iea")
@@ -115,6 +132,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qqcod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igrcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs7ks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6n3p")
+}],
+"loop": false,
+"name": &"roll",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fkybt")
 }, {
 "duration": 1.0,
@@ -142,13 +176,13 @@ animations = [{
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animator")]
 script = ExtResource("2_cvnsp")
 animator = NodePath("AnimatedSprite2D")
-bullet_scenes = ExtResource("2_6t5aa")
+normal_bullet_scene = ExtResource("2_3smsa")
+water_bullet_scene = ExtResource("3_8erm5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fkybt")
 animation = &"game_over"
 autoplay = "idle"
-frame_progress = 0.06683775
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -173,5 +207,6 @@ volume_db = 2.0
 [node name="RestartTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_roll_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_fire"]
 [connection signal="timeout" from="RestartTimer" to="." method="_reload_scene"]

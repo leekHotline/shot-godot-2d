@@ -130,9 +130,8 @@ script = ExtResource("1_p1xxi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tu4ju")
-animation = &"death"
+animation = &"slime_idle"
 autoplay = "slime_idle"
-frame_progress = 0.45882332
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)

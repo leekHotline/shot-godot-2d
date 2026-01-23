@@ -1,6 +1,8 @@
 extends Node2D
 
+#添加场景记得赋值
 @export var slime_scene: PackedScene
+@export var prop_scene: PackedScene
 
 @export var wait_timer : Timer
 
@@ -27,6 +29,12 @@ func _generate_slime() -> void:
 	var slime_node = slime_scene.instantiate()
 	slime_node.position = Vector2(253, randf_range(46,112))
 	get_tree().current_scene.add_child(slime_node)	
+	
+# 让gm管理道具 后续可以添加新的timer 可能每5s生成一个道具
+func _generate_prop() -> void:
+	var prop_node = prop_scene.instantiate()
+	prop_node.position = Vector2(randf_range(-220,220), randf_range(50,115))
+	get_tree().current_scene.add_child(prop_node)
 
 func show_go_label():
 	game_over_label.visible = true

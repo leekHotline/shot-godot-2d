@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	
 
-# 添加信号 就是触发器 当slime碰撞玩家 执行函数中代码
+# 添加信号 就是触发器 当slime碰撞玩家 执行函数中代码 
 func _on_body_entered(body: Node2D) -> void:
 	#如果碰撞到了 且史莱姆活着的时候才结束 防止0.6s的死亡动画也算
 	if body is CharacterBody2D and not is_dead:

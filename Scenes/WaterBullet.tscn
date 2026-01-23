@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://dim6nsk2f1ens"]
+
+[ext_resource type="PackedScene" uid="uid://4ojqtaf8gkqw" path="res://Scenes/Bullet.tscn" id="1_wkxdj"]
+[ext_resource type="Texture2D" uid="uid://d7ds5sspaqhj" path="res://AssetBundle/Water Spell/PNG/Water Spell_Frame_01.png" id="2_3dkyj"]
+[ext_resource type="Script" uid="uid://cp3tk1olwnkwx" path="res://water_bullet.gd" id="2_giib7"]
+[ext_resource type="Texture2D" uid="uid://bk8bnnme54npp" path="res://AssetBundle/Water Spell/PNG/Water Spell_Frame_02.png" id="3_giib7"]
+[ext_resource type="Texture2D" uid="uid://c6e0eybm0wq6" path="res://AssetBundle/Water Spell/PNG/Water Spell_Frame_03.png" id="4_06wdv"]
+[ext_resource type="Texture2D" uid="uid://csfoyjq2bxty6" path="res://AssetBundle/Water Spell/PNG/Water Spell_Frame_04.png" id="5_x6fm2"]
+[ext_resource type="Texture2D" uid="uid://vgyxp1e7355c" path="res://AssetBundle/Water Spell/PNG/Water Spell_Frame_05.png" id="6_pxjrk"]
+[ext_resource type="Texture2D" uid="uid://dwhvol6cwao8i" path="res://AssetBundle/Water Spell/PNG/Water Spell_Frame_06.png" id="7_hsdgg"]
+[ext_resource type="Texture2D" uid="uid://c18muudfs7w5p" path="res://AssetBundle/Water Spell/PNG/Water Spell_Frame_07.png" id="8_f7553"]
+[ext_resource type="Texture2D" uid="uid://btyylwn6u87sd" path="res://AssetBundle/Water Spell/PNG/Water Spell_Frame_08.png" id="9_h526p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cd17y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3dkyj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_giib7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_06wdv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x6fm2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pxjrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hsdgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f7553")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_h526p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Area2D" instance=ExtResource("1_wkxdj")]
+script = ExtResource("2_giib7")
+bullet_speed = 100.0
+
+[node name="Sprite2D" parent="." index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(17, -9.834766e-07)
+scale = Vector2(15.743779, 18.321516)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
+position = Vector2(-4.9999995, -3.5527137e-14)
+rotation = -3.1415927
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_cd17y")
+autoplay = "default"
+frame_progress = 0.42195997

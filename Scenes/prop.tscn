@@ -1,0 +1,86 @@
+[gd_scene load_steps=17 format=3 uid="uid://cq2fhaypakljc"]
+
+[ext_resource type="Texture2D" uid="uid://dnkoko23lhnrd" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_01.png" id="1_252h4"]
+[ext_resource type="Script" uid="uid://brwjjviujdww4" path="res://Scripts/prop.gd" id="1_eonws"]
+[ext_resource type="Texture2D" uid="uid://yunwgdp068nn" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_02.png" id="2_eonws"]
+[ext_resource type="Texture2D" uid="uid://6uoh8kapiuod" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_03.png" id="3_rfpyi"]
+[ext_resource type="Texture2D" uid="uid://bl5uu3uxh74so" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_04.png" id="4_g1odr"]
+[ext_resource type="Texture2D" uid="uid://bpbocvfdc5aal" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_05.png" id="5_ld6qc"]
+[ext_resource type="Texture2D" uid="uid://ni81iwtlmt6h" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_06.png" id="6_x6j3h"]
+[ext_resource type="Texture2D" uid="uid://5h7wxygm530y" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_07.png" id="7_necx1"]
+[ext_resource type="Texture2D" uid="uid://bufmct0yabign" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_08.png" id="8_7njhr"]
+[ext_resource type="Texture2D" uid="uid://bgrksti1qnye3" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_09.png" id="9_ljk6f"]
+[ext_resource type="Texture2D" uid="uid://cjjdp2kgcy62r" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_10.png" id="10_vhj16"]
+[ext_resource type="Texture2D" uid="uid://pvkj58q2brfw" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_11.png" id="11_ln3hq"]
+[ext_resource type="Texture2D" uid="uid://m3bmmxrdabst" path="res://AssetBundle/Water Ball/PNG/Water Ball_Frame_12.png" id="12_goh2j"]
+[ext_resource type="AudioStream" uid="uid://32trlodfs663" path="res://AssetBundle/Audio/gain-item.wav" id="14_ov5ie"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bw8cs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_252h4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_eonws")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rfpyi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g1odr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ld6qc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_x6j3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_necx1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7njhr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ljk6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vhj16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ln3hq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_goh2j")
+}],
+"loop": true,
+"name": &"water-ball",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eonws"]
+radius = 313.0495
+
+[node name="Area2D" type="Area2D"]
+position = Vector2(7.1054274e-15, 1.1920929e-07)
+scale = Vector2(0.42, 0.42)
+script = ExtResource("1_eonws")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -2)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_bw8cs")
+animation = &"water-ball"
+autoplay = "water-ball"
+frame_progress = 0.5486064
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -3)
+scale = Vector2(0.05, 0.05)
+shape = SubResource("CircleShape2D_eonws")
+
+[node name="PropSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_ov5ie")
+
+[connection signal="body_entered" from="." to="." method="_prop_body_entered"]
