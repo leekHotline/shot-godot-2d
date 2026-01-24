@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "godot",
+            "type": "process",
+            "command": "D:\\develop\\godot\\Godot_v4.5.1-stable_win64.exe",
+            "args": ["--path", "${workspaceFolder}", "--editor"],
+            "problemMatcher": []
+        }
+    ]
+}

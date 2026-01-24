@@ -14,9 +14,15 @@ func _process(delta: float) -> void:
 func _prop_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D :
 		# 玩家body碰撞物体 播放音效 并获得buffer增益
-		print("hit prop")
 		$PropSound.play()
+		print("hit prop")
 		$AnimatedSprite2D.visible = false
 		Global.score_board += 10
+		
+		if body.has_method("switch_bullet_mode"):
+			body.switch_bullet_mode()
+			# 声音必须要先播放完 才能删除队列上的节点
+			await $PropSound.finished
+			queue_free()
 		#释放道具
 		

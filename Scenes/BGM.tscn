@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0mbcuvp5qwh2"]
 
-[ext_resource type="AudioStream" uid="uid://ds7y2suggqov5" path="res://AssetBundle/Audio/BGM.ogg" id="1_jijru"]
+[ext_resource type="AudioStream" uid="uid://bag470t25si5l" path="res://AssetBundle/Audio/background.ogg" id="1_jijru"]
 
-[node name="BGM" type="AudioStreamPlayer"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_jijru")
+volume_db = -12.0
 autoplay = true
-parameters/looping = true

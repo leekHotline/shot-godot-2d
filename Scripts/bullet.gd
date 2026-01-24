@@ -1,7 +1,6 @@
 extends Area2D
 
 
-
 @export var bullet_speed : float = 100.0
 
 # 注意释放内存的对象是子弹场景

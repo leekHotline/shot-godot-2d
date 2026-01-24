@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Godot Editor",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "godot",
+            "program": "${workspaceFolder}/project.godot",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Current Scene",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "godot",
+            "program": "${workspaceFolder}/project.godot",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "args": ["--path", "${workspaceFolder}", "${fileBasenameNoExtension}.tscn"]
+        }
+    ]
+}
