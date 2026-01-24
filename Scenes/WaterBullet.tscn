@@ -46,7 +46,6 @@ animations = [{
 [node name="Area2D" instance=ExtResource("1_wkxdj")]
 script = ExtResource("2_giib7")
 water_bullet_speed = 200.0
-water_duration = 2.0
 bullet_speed = 100.0
 
 [node name="Sprite2D" parent="." index="0"]

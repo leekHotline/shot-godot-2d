@@ -13,8 +13,8 @@ extends CharacterBody2D
 # 添加两个场景
 
 
-# 新增水子弹的倒计时变量
-var water_bullet_timer : float = 0.0
+# 水弹能力的持续时间（秒）
+var water_bullet_duration : float = 3.0
 # 子弹场景默认是普通的 需要延迟赋值
 @onready var current_bullet_scenes : PackedScene = normal_bullet_scene
 
@@ -26,10 +26,17 @@ var roll_time : float = 1.0
 
 # 静止 游戏中 不应该播放 只有 wsad移动即速度不为零且游戏中时才播放音乐否则暂停
 func _process(delta: float) -> void:
+	# 水弹能力倒计时
+	if water_bullet_duration > 0:
+		water_bullet_duration -= delta
+		if water_bullet_duration <= 0:
+			print("水弹能力结束，变回普通子弹")
+			current_bullet_scenes = normal_bullet_scene
+
 	# 当速度不为0或者游戏没有结束时 播放音乐
 	if velocity == Vector2.ZERO or is_game_over:
 		$RunSound.stop()
-	# 如果跑步音效没有播放的话需要播放音乐 
+	# 如果跑步音效没有播放的话需要播放音乐
 	elif not $RunSound.playing:
 		$RunSound.play()
 		
@@ -69,11 +76,7 @@ func _physics_process(delta: float) -> void:
 			#is_rolling = true
 			#animator.play('roll')
 			
-		
 
-		
-
-			
 				
 		if velocity == Vector2.ZERO:
 			animator.play('idle')
@@ -108,9 +111,11 @@ func game_over() -> void:
 		#await get_tree().create_timer(3).timeout
 		#get_tree().reload_current_scene()
 	
-# 子弹能力
+# 子弹能力切换到水弹
 func switch_bullet_mode() -> void:
 	current_bullet_scenes = water_bullet_scene
+	water_bullet_duration = 3.0  # 水弹能力持续10秒
+	print("获得水弹能力！持续10秒")
 
 # 创建子弹图纸 子弹由position出现
 func _on_fire() -> void:
